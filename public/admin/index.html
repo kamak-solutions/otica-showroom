@@ -1,0 +1,678 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin — Ótica ShowRoom</title>
+    <style>
+      :root {
+        --gold: #c9a84c;
+        --black: #0a0a0a;
+        --dark: #111;
+        --card: #161616;
+        --white: #f5f2ee;
+        --danger: #e05252;
+        --success: #25d366;
+      }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      body {
+        background: var(--black);
+        color: var(--white);
+        font-family: "DM Sans", sans-serif;
+      }
+      header {
+        background: #111;
+        border-bottom: 1px solid rgba(201, 168, 76, 0.2);
+        padding: 16px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .logo {
+        font-size: 18px;
+        letter-spacing: 4px;
+        font-weight: 300;
+        text-transform: uppercase;
+      }
+      .logo span {
+        color: var(--gold);
+      }
+      .btn {
+        padding: 10px 20px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        border: none;
+        cursor: pointer;
+        clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+      }
+      .btn-gold {
+        background: var(--gold);
+        color: var(--black);
+      }
+      .btn-danger {
+        background: var(--danger);
+        color: #fff;
+      }
+      .btn-ghost {
+        background: transparent;
+        color: var(--gold);
+        border: 1px solid rgba(201, 168, 76, 0.3);
+        clip-path: none;
+      }
+      .btn:hover {
+        opacity: 0.85;
+      }
+      main {
+        padding: 32px;
+        max-width: 1200px;
+        margin: 0 auto;
+      }
+      .top-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 24px;
+      }
+      .top-bar h1 {
+        font-size: 22px;
+        font-weight: 300;
+      }
+      .top-bar h1 span {
+        color: var(--gold);
+      }
+      /* FILTROS */
+      .filters {
+        display: flex;
+        gap: 8px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+      }
+      .filter-btn {
+        background: #1c1c1c;
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        color: rgba(245, 242, 238, 0.5);
+        font-size: 10px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 8px 16px;
+        cursor: pointer;
+        clip-path: polygon(4px 0%, 100% 0%, calc(100% - 4px) 100%, 0% 100%);
+      }
+      .filter-btn.active {
+        background: var(--gold);
+        color: var(--black);
+        border-color: var(--gold);
+      }
+      /* TABELA */
+      .table-wrap {
+        overflow-x: auto;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 12px;
+      }
+      th {
+        text-align: left;
+        padding: 12px 14px;
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(245, 242, 238, 0.3);
+        border-bottom: 1px solid rgba(201, 168, 76, 0.1);
+      }
+      td {
+        padding: 12px 14px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        vertical-align: middle;
+      }
+      tr:hover td {
+        background: rgba(201, 168, 76, 0.04);
+      }
+      .badge {
+        display: inline-block;
+        font-size: 8px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        background: var(--gold);
+        color: var(--black);
+      }
+      .inativo {
+        opacity: 0.35;
+      }
+      .cor-dot {
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        display: inline-block;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+      }
+      .acoes {
+        display: flex;
+        gap: 8px;
+      }
+      /* MODAL FORM */
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.25s;
+      }
+      .overlay.open {
+        opacity: 1;
+        pointer-events: all;
+      }
+      .modal {
+        background: #161616;
+        border: 1px solid rgba(201, 168, 76, 0.2);
+        width: 100%;
+        max-width: 680px;
+        max-height: 90vh;
+        overflow-y: auto;
+        padding: 32px;
+        transform: translateY(20px);
+        transition: transform 0.3s;
+      }
+      .overlay.open .modal {
+        transform: translateY(0);
+      }
+      .modal h2 {
+        font-size: 20px;
+        font-weight: 300;
+        margin-bottom: 24px;
+      }
+      .modal h2 span {
+        color: var(--gold);
+      }
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+      }
+      .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+      }
+      .form-group.full {
+        grid-column: 1 / -1;
+      }
+      label {
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: rgba(245, 242, 238, 0.4);
+      }
+      input,
+      select,
+      textarea {
+        background: #1c1c1c;
+        border: 1px solid rgba(201, 168, 76, 0.15);
+        color: var(--white);
+        padding: 10px 12px;
+        font-size: 12px;
+        font-family: inherit;
+        outline: none;
+        width: 100%;
+      }
+      input:focus,
+      select:focus,
+      textarea:focus {
+        border-color: rgba(201, 168, 76, 0.5);
+      }
+      textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+      select option {
+        background: #1c1c1c;
+      }
+      .form-actions {
+        display: flex;
+        gap: 12px;
+        justify-content: flex-end;
+        margin-top: 24px;
+      }
+      /* TOAST */
+      .toast {
+        position: fixed;
+        bottom: 24px;
+        right: 24px;
+        z-index: 999;
+        background: var(--gold);
+        color: var(--black);
+        padding: 12px 24px;
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        opacity: 0;
+        transform: translateY(10px);
+        transition: all 0.3s;
+        pointer-events: none;
+      }
+      .toast.show {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      .toast.error {
+        background: var(--danger);
+        color: #fff;
+      }
+      /* LOADING */
+      .loading {
+        text-align: center;
+        padding: 60px;
+        color: rgba(245, 242, 238, 0.3);
+        font-size: 11px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="logo">
+        <span>Show</span>Room
+        <span style="font-size: 11px; opacity: 0.5">/ Admin</span>
+      </div>
+      <a href="/" class="btn btn-ghost" style="text-decoration: none"
+        >← Ver Catálogo</a
+      >
+    </header>
+
+    <main>
+      <div class="top-bar">
+        <h1>Produtos <span>cadastrados</span></h1>
+        <button class="btn btn-gold" onclick="abrirForm()">
+          + Novo Produto
+        </button>
+      </div>
+
+      <div class="filters" id="filters">
+        <button class="filter-btn active" data-cat="todos">Todos</button>
+        <button class="filter-btn" data-cat="feminino">Feminino</button>
+        <button class="filter-btn" data-cat="masculino">Masculino</button>
+        <button class="filter-btn" data-cat="infantil">Infantil</button>
+        <button class="filter-btn" data-cat="sol">Óculos de Sol</button>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Cor</th>
+              <th>Nome</th>
+              <th>Marca</th>
+              <th>Categoria</th>
+              <th>Preço</th>
+              <th>Badge</th>
+              <th>Status</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+        <div class="loading" id="loading">Carregando<span>...</span></div>
+      </div>
+    </main>
+
+    <!-- MODAL FORM -->
+    <div class="overlay" id="overlay">
+      <div class="modal">
+        <h2 id="formTitulo">Novo <span>Produto</span></h2>
+        <form id="formProduto" onsubmit="salvarProduto(event)">
+          <input type="hidden" id="fId" />
+          <div class="form-grid">
+            <div class="form-group">
+              <label>Nome *</label>
+              <input type="text" id="fNome" required />
+            </div>
+            <div class="form-group">
+              <label>Marca *</label>
+              <input type="text" id="fMarca" required />
+            </div>
+            <div class="form-group">
+              <label>Categoria *</label>
+              <select id="fCategoria" required>
+                <option value="feminino">Feminino</option>
+                <option value="masculino">Masculino</option>
+                <option value="infantil">Infantil</option>
+                <option value="sol">Óculos de Sol</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>Gênero</label>
+              <input
+                type="text"
+                id="fGenero"
+                placeholder="Ex: Feminino, Unissex"
+              />
+            </div>
+            <div class="form-group">
+              <label>Preço *</label>
+              <input type="text" id="fPreco" placeholder="R$ 299" required />
+            </div>
+            <div class="form-group">
+              <label>Preço Antigo</label>
+              <input type="text" id="fAntigo" placeholder="R$ 350" />
+            </div>
+            <div class="form-group">
+              <label>Badge</label>
+              <input
+                type="text"
+                id="fBadge"
+                placeholder="NOVO, OFERTA, PREMIUM"
+              />
+            </div>
+            <div class="form-group">
+              <label>Cor (hex)</label>
+              <input type="text" id="fCor" placeholder="#C9A84C" />
+            </div>
+            <div class="form-group">
+              <label>RX (arredondamento)</label>
+              <input
+                type="number"
+                id="fRx"
+                placeholder="0–50"
+                min="0"
+                max="50"
+              />
+            </div>
+            <div class="form-group">
+              <label>Material</label>
+              <input
+                type="text"
+                id="fMaterial"
+                placeholder="Acetato italiano"
+              />
+            </div>
+            <div class="form-group">
+              <label>Formato</label>
+              <input type="text" id="fFormato" placeholder="Gatinho, Oval..." />
+            </div>
+            <div class="form-group full">
+              <label>Descrição</label>
+              <textarea
+                id="fDescricao"
+                placeholder="Descrição do produto..."
+              ></textarea>
+            </div>
+            <div class="form-group full">
+              <label>Imagem Capa</label>
+              <div style="display: flex; gap: 8px; align-items: center">
+                <input
+                  type="text"
+                  id="fImgCapa"
+                  placeholder="URL ou faça upload →"
+                />
+                <input
+                  type="file"
+                  id="uploadCapa"
+                  accept="image/*"
+                  style="display: none"
+                  onchange="uploadImagem('uploadCapa', 'fImgCapa')"
+                />
+                <button
+                  type="button"
+                  class="btn btn-ghost"
+                  style="padding: 10px 16px; white-space: nowrap"
+                  onclick="document.getElementById('uploadCapa').click()"
+                >
+                  📁 Upload
+                </button>
+              </div>
+            </div>
+           <div class="form-group">
+  <label>Imagem Lateral (URL)</label>
+  <div style="display:flex;gap:8px;align-items:center">
+    <input type="text" id="fImgLateral" placeholder="URL ou faça upload →"/>
+    <input type="file" id="uploadLateral" accept="image/*" style="display:none" onchange="uploadImagem('uploadLateral','fImgLateral')"/>
+    <button type="button" class="btn btn-ghost" style="padding:10px 16px;white-space:nowrap" onclick="document.getElementById('uploadLateral').click()">📁</button>
+  </div>
+</div>
+
+<div class="form-group">
+  <label>Imagem Detalhe (URL)</label>
+  <div style="display:flex;gap:8px;align-items:center">
+    <input type="text" id="fImgDetalhe" placeholder="URL ou faça upload →"/>
+    <input type="file" id="uploadDetalhe" accept="image/*" style="display:none" onchange="uploadImagem('uploadDetalhe','fImgDetalhe')"/>
+    <button type="button" class="btn btn-ghost" style="padding:10px 16px;white-space:nowrap" onclick="document.getElementById('uploadDetalhe').click()">📁</button>
+  </div>
+</div>
+
+<div class="form-group full">
+  <label>Imagem Ambiente (URL)</label>
+  <div style="display:flex;gap:8px;align-items:center">
+    <input type="text" id="fImgAmbiente" placeholder="URL ou faça upload →"/>
+    <input type="file" id="uploadAmbiente" accept="image/*" style="display:none" onchange="uploadImagem('uploadAmbiente','fImgAmbiente')"/>
+    <button type="button" class="btn btn-ghost" style="padding:10px 16px;white-space:nowrap" onclick="document.getElementById('uploadAmbiente').click()">📁</button>
+  </div>
+</div>
+          <div class="form-actions">
+            <button type="button" class="btn btn-ghost" onclick="fecharForm()">
+              Cancelar
+            </button>
+            <button type="submit" class="btn btn-gold" id="btnSalvar">
+              Salvar
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <div class="toast" id="toast"></div>
+
+    <script>
+      const API = "/admin/api";
+      const CREDS = btoa("admin:admin2025");
+      const H = {
+        "Content-Type": "application/json",
+        Authorization: `Basic ${CREDS}`,
+      };
+
+      let todos = [];
+      let filtroAtual = "todos";
+
+      async function uploadImagem(inputId, campoId) {
+        const file = document.getElementById(inputId).files[0];
+        if (!file) return;
+        const form = new FormData();
+        form.append("file", file);
+        toast("Enviando imagem...");
+        try {
+          const r = await fetch("/admin/api/upload", {
+            method: "POST",
+            headers: { Authorization: `Basic ${CREDS}` },
+            body: form,
+          });
+          const data = await r.json();
+          if (data.url) {
+            document.getElementById(campoId).value = data.url;
+            toast("Upload concluído!");
+          } else {
+            toast("Erro no upload", true);
+          }
+        } catch {
+          toast("Erro no upload", true);
+        }
+      }
+
+      async function carregar() {
+        document.getElementById("loading").style.display = "block";
+        document.getElementById("tbody").innerHTML = "";
+        try {
+          const r = await fetch(`${API}/produtos`, { headers: H });
+          todos = await r.json();
+          renderTabela(todos);
+        } catch (e) {
+          toast("Erro ao carregar", true);
+        }
+        document.getElementById("loading").style.display = "none";
+      }
+
+      function renderTabela(lista) {
+        const tbody = document.getElementById("tbody");
+        const filtrados =
+          filtroAtual === "todos"
+            ? lista
+            : lista.filter((p) => p.categoria === filtroAtual);
+        tbody.innerHTML = filtrados
+          .map(
+            (p) => `
+    <tr class="${p.ativo ? "" : "inativo"}">
+      <td>${p.id}</td>
+      <td><span class="cor-dot" style="background:${p.cor || "#333"}"></span></td>
+      <td>${p.nome}</td>
+      <td>${p.marca}</td>
+      <td>${p.categoria}</td>
+      <td>${p.preco}</td>
+      <td>${p.badge ? `<span class="badge">${p.badge}</span>` : "—"}</td>
+      <td>${p.ativo ? "✅" : "❌"}</td>
+      <td>
+        <div class="acoes">
+          <button class="btn btn-ghost" style="padding:6px 12px;font-size:10px" onclick="editarProduto(${p.id})">Editar</button>
+          <button class="btn btn-danger" style="padding:6px 12px;font-size:10px" onclick="deletarProduto(${p.id}, '${p.nome}')">Excluir</button>
+        </div>
+      </td>
+    </tr>
+  `,
+          )
+          .join("");
+      }
+
+      // Filtros
+      document.getElementById("filters").addEventListener("click", (e) => {
+        const btn = e.target.closest(".filter-btn");
+        if (!btn) return;
+        document
+          .querySelectorAll(".filter-btn")
+          .forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+        filtroAtual = btn.dataset.cat;
+        renderTabela(todos);
+      });
+
+      function abrirForm(prod = null) {
+        document.getElementById("formTitulo").innerHTML = prod
+          ? "Editar <span>Produto</span>"
+          : "Novo <span>Produto</span>";
+        document.getElementById("fId").value = prod?.id || "";
+        document.getElementById("fNome").value = prod?.nome || "";
+        document.getElementById("fMarca").value = prod?.marca || "";
+        document.getElementById("fCategoria").value =
+          prod?.categoria || "feminino";
+        document.getElementById("fGenero").value = prod?.genero || "";
+        document.getElementById("fPreco").value = prod?.preco || "";
+        document.getElementById("fAntigo").value = prod?.antigo || "";
+        document.getElementById("fBadge").value = prod?.badge || "";
+        document.getElementById("fCor").value = prod?.cor || "#C9A84C";
+        document.getElementById("fRx").value = prod?.rx ?? 0;
+        document.getElementById("fMaterial").value = prod?.material || "";
+        document.getElementById("fFormato").value = prod?.formato || "";
+        document.getElementById("fDescricao").value = prod?.descricao || "";
+        document.getElementById("fImgCapa").value = prod?.img_capa || "";
+        document.getElementById("fImgLateral").value = prod?.img_lateral || "";
+        document.getElementById("fImgDetalhe").value = prod?.img_detalhe || "";
+        document.getElementById("fImgAmbiente").value =
+          prod?.img_ambiente || "";
+        document.getElementById("overlay").classList.add("open");
+      }
+
+      function fecharForm() {
+        document.getElementById("overlay").classList.remove("open");
+      }
+
+      function editarProduto(id) {
+        const prod = todos.find((p) => p.id === id);
+        if (prod) abrirForm(prod);
+      }
+
+      async function salvarProduto(e) {
+        e.preventDefault();
+        const id = document.getElementById("fId").value;
+        const body = {
+          categoria: document.getElementById("fCategoria").value,
+          nome: document.getElementById("fNome").value,
+          marca: document.getElementById("fMarca").value,
+          preco: document.getElementById("fPreco").value,
+          antigo: document.getElementById("fAntigo").value || null,
+          badge: document.getElementById("fBadge").value || null,
+          cor: document.getElementById("fCor").value || "#C9A84C",
+          rx: Number(document.getElementById("fRx").value) || 0,
+          material: document.getElementById("fMaterial").value || null,
+          formato: document.getElementById("fFormato").value || null,
+          genero: document.getElementById("fGenero").value || null,
+          descricao: document.getElementById("fDescricao").value || null,
+          img_capa: document.getElementById("fImgCapa").value || null,
+          img_lateral: document.getElementById("fImgLateral").value || null,
+          img_detalhe: document.getElementById("fImgDetalhe").value || null,
+          img_ambiente: document.getElementById("fImgAmbiente").value || null,
+        };
+        const btnSalvar = document.getElementById("btnSalvar");
+        btnSalvar.textContent = "Salvando...";
+        btnSalvar.disabled = true;
+        try {
+          const url = id ? `${API}/produtos/${id}` : `${API}/produtos`;
+          const method = id ? "PUT" : "POST";
+          const r = await fetch(url, {
+            method,
+            headers: H,
+            body: JSON.stringify(body),
+          });
+          if (!r.ok) throw new Error();
+          toast(id ? "Produto atualizado!" : "Produto criado!");
+          fecharForm();
+          await carregar();
+        } catch {
+          toast("Erro ao salvar", true);
+        }
+        btnSalvar.textContent = "Salvar";
+        btnSalvar.disabled = false;
+      }
+
+      async function deletarProduto(id, nome) {
+        if (!confirm(`Desativar "${nome}"?`)) return;
+        try {
+          await fetch(`${API}/produtos/${id}`, {
+            method: "DELETE",
+            headers: H,
+          });
+          toast("Produto desativado!");
+          await carregar();
+        } catch {
+          toast("Erro ao deletar", true);
+        }
+      }
+
+      function toast(msg, erro = false) {
+        const t = document.getElementById("toast");
+        t.textContent = msg;
+        t.className = "toast show" + (erro ? " error" : "");
+        setTimeout(() => (t.className = "toast"), 3000);
+      }
+
+      // Fecha modal clicando fora
+      document.getElementById("overlay").addEventListener("click", (e) => {
+        if (e.target === document.getElementById("overlay")) fecharForm();
+      });
+
+      carregar();
+    </script>
+  </body>
+</html>

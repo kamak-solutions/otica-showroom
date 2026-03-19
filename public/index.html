@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ótica ShowRoom — Catálogo</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo"><span>Show</span>Room</div>
+  <a class="header-cta" href="https://wa.me/5511963208855?text=Ol%C3%A1%20quero%20or%C3%A7amento." target="_blank">Orçamento</a>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-tag">Nova Coleção 2025</div>
+  <h1>Ver com<br><em>estilo</em><br>é tudo.</h1>
+  <p>Armações premium para todos os estilos. Feminino, masculino, infantil e óculos de sol.</p>
+  <a class="hero-btn" href="https://wa.me/5511963208855?text=Ol%C3%A1%20quero%20or%C3%A7amento." target="_blank">Falar no WhatsApp</a>
+  <div class="hero-deco"></div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee-wrap">
+  <div class="marquee-track">
+    <span>Feminino</span><span>Masculino</span><span>Infantil</span><span>Óculos de Sol</span>
+    <span>Lentes de Contato</span><span>Exame de Vista</span><span>Armações Premium</span>
+    <span>Feminino</span><span>Masculino</span><span>Infantil</span><span>Óculos de Sol</span>
+    <span>Lentes de Contato</span><span>Exame de Vista</span><span>Armações Premium</span>
+  </div>
+</div>
+
+<!-- TABS -->
+<nav class="cats">
+  <button class="cat-btn active" data-cat="feminino">Feminino</button>
+  <button class="cat-btn" data-cat="masculino">Masculino</button>
+  <button class="cat-btn" data-cat="infantil">Infantil</button>
+  <button class="cat-btn" data-cat="sol">Óculos de Sol</button>
+</nav>
+
+<!-- SEÇÕES -->
+<section id="sec-feminino" class="cat-section active">
+  <div class="section-header"><h2>Armações <em>Femininas</em></h2><span class="count" id="cnt-feminino"></span></div>
+  <div class="scroll-wrapper"><div class="scroll-area"><div class="grid" id="grid-feminino"><div class="msg-state"><span class="dot">•</span><span class="dot">•</span><span class="dot">•</span></div></div></div></div>
+</section>
+
+<section id="sec-masculino" class="cat-section">
+  <div class="section-header"><h2>Armações <em>Masculinas</em></h2><span class="count" id="cnt-masculino"></span></div>
+  <div class="scroll-wrapper"><div class="scroll-area"><div class="grid" id="grid-masculino"><div class="msg-state"><span class="dot">•</span><span class="dot">•</span><span class="dot">•</span></div></div></div></div>
+</section>
+
+<section id="sec-infantil" class="cat-section">
+  <div class="section-header"><h2>Coleção <em>Infantil</em></h2><span class="count" id="cnt-infantil"></span></div>
+  <div class="scroll-wrapper"><div class="scroll-area"><div class="grid" id="grid-infantil"><div class="msg-state"><span class="dot">•</span><span class="dot">•</span><span class="dot">•</span></div></div></div></div>
+</section>
+
+<section id="sec-sol" class="cat-section">
+  <div class="section-header"><h2>Óculos de <em>Sol</em></h2><span class="count" id="cnt-sol"></span></div>
+  <div class="scroll-wrapper"><div class="scroll-area"><div class="grid" id="grid-sol"><div class="msg-state"><span class="dot">•</span><span class="dot">•</span><span class="dot">•</span></div></div></div></div>
+</section>
+
+<!-- BANNER PROMO -->
+<div class="banner-promo">
+  <div class="banner-promo-tag">Oferta Especial</div>
+  <h3>Armação +<br>Lentes por<br><em>R$ 199</em></h3>
+  <p>Lentes simples incluídas. Consulte disponibilidade.</p>
+  <a class="banner-wa-btn" href="https://wa.me/5511963208855?text=Ol%C3%A1%20quero%20or%C3%A7amento." target="_blank">
+    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.118 1.524 5.855L0 24l6.336-1.499A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.856 0-3.592-.5-5.088-1.373l-.364-.214-3.762.89.948-3.667-.237-.38A9.946 9.946 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+    Aproveitar agora
+  </a>
+</div>
+
+
+<!-- SEÇÃO LENTES -->
+<section class="lentes-section">
+
+  <div class="lentes-header">
+    <div class="lentes-eyebrow">Nossos serviços</div>
+    <h2>Lentes para<br>cada <em>necessidade</em></h2>
+    <p>Trabalhamos com as melhores tecnologias em lentes ópticas e solares, com tratamentos que garantem conforto, durabilidade e clareza visual.</p>
+  </div>
+
+  <div class="lentes-grid">
+
+    <div class="lente-card">
+      <svg class="lente-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="18" cy="18" r="10"/><line x1="18" y1="2" x2="18" y2="8"/><line x1="18" y1="28" x2="18" y2="34"/><line x1="2" y1="18" x2="8" y2="18"/><line x1="28" y1="18" x2="34" y2="18"/></svg>
+      <div class="lente-nome">Lente Simples</div>
+      <div class="lente-desc">Visão para longe ou perto. Indicada para miopia, hipermetropia e astigmatismo.</div>
+      <span class="lente-tag">Mais vendida</span>
+    </div>
+
+    <div class="lente-card">
+      <svg class="lente-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5"><ellipse cx="18" cy="18" rx="14" ry="10"/><line x1="4" y1="18" x2="32" y2="18" stroke-dasharray="3 2"/></svg>
+      <div class="lente-nome">Lente Bifocal</div>
+      <div class="lente-desc">Duas graduações em uma só lente — longe na parte superior e perto na inferior.</div>
+      <span class="lente-tag">Clássica</span>
+    </div>
+
+    <div class="lente-card">
+      <svg class="lente-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 26 Q10 10 18 18 Q26 26 32 10"/><circle cx="18" cy="18" r="3" fill="currentColor" opacity=".4"/></svg>
+      <div class="lente-nome">Lente Progressiva</div>
+      <div class="lente-desc">Transição suave entre longe, intermediário e perto. Sem linha visível.</div>
+      <span class="lente-tag">Premium</span>
+    </div>
+
+    <div class="lente-card">
+      <svg class="lente-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="6" y="10" width="24" height="16" rx="3"/><path d="M12 10 V6 M24 10 V6" stroke-linecap="round"/><line x1="11" y1="18" x2="25" y2="18" stroke-dasharray="2 2" opacity=".5"/></svg>
+      <div class="lente-nome">Lente para Tela</div>
+      <div class="lente-desc">Filtro de luz azul para computador, celular e TV. Reduz fadiga e preserva o sono.</div>
+      <span class="lente-tag">Recomendada</span>
+    </div>
+
+    <div class="lente-card">
+      <svg class="lente-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="18" cy="18" r="10"/><path d="M10 10 Q18 4 26 10" opacity=".5"/><line x1="18" y1="2" x2="14" y2="6" opacity=".4"/><line x1="18" y1="2" x2="22" y2="6" opacity=".4"/></svg>
+      <div class="lente-nome">Fotossensível</div>
+      <div class="lente-desc">Escurece automaticamente sob a luz solar. Conforto dentro e fora de ambientes.</div>
+      <span class="lente-tag">Transitions®</span>
+    </div>
+
+    <div class="lente-card">
+      <svg class="lente-icon" viewBox="0 0 36 36" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 18 Q6 10 18 10 Q30 10 30 18 Q30 26 18 26 Q6 26 6 18Z"/><circle cx="18" cy="18" r="4" fill="currentColor" opacity=".25"/><line x1="24" y1="12" x2="30" y2="6" opacity=".5"/></svg>
+      <div class="lente-nome">Solar com Grau</div>
+      <div class="lente-desc">Proteção UV total com sua correção visual. Óculos de sol totalmente funcional.</div>
+      <span class="lente-tag">UV400</span>
+    </div>
+
+  </div>
+
+  <div class="lentes-wa-wrap">
+    <div class="lentes-wa-txt">Dúvidas sobre<br><em>qual lente escolher?</em></div>
+    <a class="lentes-wa-btn" href="https://wa.me/5511963208855?text=Ol%C3%A1%20quero%20or%C3%A7amento." target="_blank">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.118 1.524 5.855L0 24l6.336-1.499A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.856 0-3.592-.5-5.088-1.373l-.364-.214-3.762.89.948-3.667-.237-.38A9.946 9.946 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+      Pedir orçamento
+    </a>
+  </div>
+
+</section>
+
+<!-- MARCAS DE LENTES -->
+<section class="marcas-section">
+
+  <div class="marcas-header">
+    <div class="marcas-eyebrow">Tecnologia de ponta</div>
+    <h3>Marcas que <em>confiamos</em></h3>
+  </div>
+
+  <div class="marcas-track-wrap">
+    <div class="marcas-track esquerda">
+      <span class="marca-item"><span class="marca-nome">Varilux</span><span class="marca-sep">◆</span></span>
+      <span class="marca-item"><span class="marca-nome">Crizal</span><span class="marca-sep">◆</span></span>
+      <span class="marca-item"><span class="marca-nome">Kodak</span><span class="marca-sep">◆</span></span>
+      <span class="marca-item"><span class="marca-nome">Zeiss</span><span class="marca-sep">◆</span></span>
+      <span class="marca-item"><span class="marca-nome">Hoya</span><span class="marca-sep">◆</span></span>
+      <span class="marca-item"><span class="marca-nome">Essilor</span><span class="marca-sep">◆</span></span>
+      <span class="marca-item"><span class="marca-nome">Varilux</span><span class="marca-sep">◆</span></span>
+      <span class="marca-item"><span class="marca-nome">Crizal</span><span class="marca-sep">◆</span></span>
+      <span class="marca-item"><span class="marca-nome">Kodak</span><span class="marca-sep">◆</span></span>
+      <span class="marca-item"><span class="marca-nome">Zeiss</span><span class="marca-sep">◆</span></span>
+      <span class="marca-item"><span class="marca-nome">Hoya</span><span class="marca-sep">◆</span></span>
+      <span class="marca-item"><span class="marca-nome">Essilor</span><span class="marca-sep">◆</span></span>
+    </div>
+  </div>
+
+  <div class="marcas-track-wrap">
+    <div class="marcas-track direita">
+      <span class="marca-item"><span class="marca-nome">Shamir</span><span class="marca-sep">·</span></span>
+      <span class="marca-item"><span class="marca-nome">Rodenstock</span><span class="marca-sep">·</span></span>
+      <span class="marca-item"><span class="marca-nome">Nikon</span><span class="marca-sep">·</span></span>
+      <span class="marca-item"><span class="marca-nome">Seiko</span><span class="marca-sep">·</span></span>
+      <span class="marca-item"><span class="marca-nome">Indo</span><span class="marca-sep">·</span></span>
+      <span class="marca-item"><span class="marca-nome">Younger</span><span class="marca-sep">·</span></span>
+      <span class="marca-item"><span class="marca-nome">Shamir</span><span class="marca-sep">·</span></span>
+      <span class="marca-item"><span class="marca-nome">Rodenstock</span><span class="marca-sep">·</span></span>
+      <span class="marca-item"><span class="marca-nome">Nikon</span><span class="marca-sep">·</span></span>
+      <span class="marca-item"><span class="marca-nome">Seiko</span><span class="marca-sep">·</span></span>
+      <span class="marca-item"><span class="marca-nome">Indo</span><span class="marca-sep">·</span></span>
+      <span class="marca-item"><span class="marca-nome">Younger</span><span class="marca-sep">·</span></span>
+    </div>
+  </div>
+
+  <div class="marcas-divider"><span>e muito mais</span></div>
+
+</section>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo"><span>Show</span>Room</div>
+  <p>📍 Rua das Flores, 1234 — São Paulo SP</p>
+  <p>📞 (11) 9 9999-9999</p>
+  <p>🕐 Seg–Sex: 9h–19h &nbsp;|&nbsp; Sáb: 9h–15h</p>
+  <div class="footer-divider"></div>
+  <div class="footer-copy">© 2025 Ótica ShowRoom</div>
+</footer>
+
+<!-- ══ MODAL DE PRODUTO ══════════════════════════════ -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-label="Detalhes do produto">
+  <div class="modal" id="modal">
+    <div class="modal-handle"></div>
+    <button class="modal-close" id="modalClose" aria-label="Fechar">✕</button>
+
+    <div class="modal-inner">
+
+      <!-- GALERIA -->
+      <div class="modal-gallery">
+        <div class="modal-main-img" id="modalMainImg">
+          <!-- preenchido pelo JS -->
+        </div>
+        <div class="modal-thumbs" id="modalThumbs">
+          <!-- preenchido pelo JS -->
+        </div>
+      </div>
+
+      <!-- INFORMAÇÕES -->
+      <div class="modal-info" id="modalInfo">
+        <!-- preenchido pelo JS -->
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ LIGHTBOX — visualização em tela cheia ════════════════ -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visualização ampliada">
+
+  <div class="lightbox-bar">
+    <span class="lightbox-label" id="lbLabel"></span>
+    <button class="lightbox-close" id="lbClose" aria-label="Fechar">✕</button>
+  </div>
+
+  <div class="lightbox-img-wrap" id="lbImgWrap">
+    <!-- imagem principal preenchida pelo JS -->
+    <button class="lightbox-nav prev" id="lbPrev" aria-label="Anterior">‹</button>
+    <button class="lightbox-nav next" id="lbNext" aria-label="Próxima">›</button>
+  </div>
+
+  <div class="lightbox-strip" id="lbStrip">
+    <!-- miniaturas preenchidas pelo JS -->
+  </div>
+
+</div>
+
+<!-- BOTÃO FLUTUANTE WHATSAPP -->
+<a class="float-wa" href="https://wa.me/5511963208855?text=Ol%C3%A1%20quero%20or%C3%A7amento." target="_blank" aria-label="WhatsApp">
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.122.554 4.118 1.524 5.855L0 24l6.336-1.499A11.943 11.943 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 22c-1.856 0-3.592-.5-5.088-1.373l-.364-.214-3.762.89.948-3.667-.237-.38A9.946 9.946 0 012 12C2 6.477 6.477 2 12 2s10 4.477 10 10-4.477 10-10 10z"/></svg>
+</a>
+
+<script type="module" src="js/script.js"></script>
+</body>
+</html>
