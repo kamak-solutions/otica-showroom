@@ -1,6 +1,10 @@
 import 'dotenv/config';
 import postgres from 'postgres';
 
+const ssl = process.env.DB_HOST?.includes('supabase.co')
+  ? { rejectUnauthorized: false }
+  : false;
+
 const sql = postgres({
   host:     process.env.DB_HOST,
   port:     Number(process.env.DB_PORT),
